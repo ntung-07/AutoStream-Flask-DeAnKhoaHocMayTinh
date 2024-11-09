@@ -1,0 +1,281 @@
+/* Reset and Global Styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #000;
+    border-bottom: none;
+    display: flex;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-header {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo img {
+    height: 80px;
+    width: 200px;
+}
+
+.navbar-toggle {
+    display: none;
+}
+
+.navbar-collapse {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar ul li a {
+    color: #f5f7fa;
+    font-size: 16px;
+    font-weight: 550;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar ul li a:hover,
+.navbar ul li.active > a {
+    color: #4e4ffa;
+}
+
+/* Mobile Navbar Toggle */
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: block;
+        color: #4e4ffa;
+        background-color: transparent;
+        border: 1px solid #4e4ffa;
+        padding: 10px;
+        margin-left: auto;
+        cursor: pointer;
+    }
+
+    .navbar-collapse {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: #000;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .navbar-collapse.active {
+        display: flex;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .navbar ul li {
+        width: 100%;
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    .navbar ul li a {
+        padding: 15px;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Vehicle Listings Section */
+.section-title,
+.suggested-section-title {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+    color: #333;
+}
+
+.vehicle-listings-section {
+    flex: 3;
+    padding-right: 30px;
+    border-right: 1px solid black;
+}
+
+.vehicle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.vehicle-tile {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.vehicle-tile:hover {
+    transform: scale(1.05);
+}
+
+.vehicle-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.vehicle-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.vehicle-type,
+.vehicle-color {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Suggested Vehicles Section */
+.suggested-vehicles-section {
+    flex: 1;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-left: 20px;
+    background-color: #eaeaea;
+    border-radius: 8px;
+}
+
+.suggested-vehicle-text h2 {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+.suggested-vehicle-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.suggested-vehicle-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.suggested-vehicle-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+.suggested-vehicle-list::-webkit-scrollbar-thumb {
+    background: #4e4ffa;
+    border-radius: 8px;
+}
+
+.suggested-vehicle-list::-webkit-scrollbar-thumb:hover {
+    background: #333;
+}
+
+/* Footer or Additional Styling */
+footer {
+    background-color: #333;
+    color: #f4f4f9;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* Hover and Active States */
+.vehicle-tile:hover,
+.suggested-vehicle-list:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+a {
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #4e4ffa;
+}
+
+.chat-icon {
+    cursor: pointer;    
+}
+
+.chat-icon img{
+    height: 20px;
+    width: 20px;
+}
+
+.chat-window {
+    width: 300px;
+    position: fixed;
+    height: 400px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.chat-content {
+    padding: 15px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.chat-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}

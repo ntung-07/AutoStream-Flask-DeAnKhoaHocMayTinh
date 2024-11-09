@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Window Example</title>
+    <link rel="stylesheet" href="../static/test.css">
+</head>
+<body>
+    <!-- Icon -->
+    <div class="chat-icon" onclick="toggleChatWindow()">💬</div>
+
+    <!-- Chat window -->
+    <div id="chatWindow" class="chat-window">
+        <div class="chat-header">
+            <span>Chat</span>
+            <button onclick="toggleChatWindow()">X</button>
+        </div>
+        <div class="chat-content">
+            <p>Xin chào! Cần giúp đỡ gì không?</p>
+            <p>Đây là một tin nhắn ngẫu nhiên.</p>
+            <p>Hãy bấm vào icon để đóng cửa sổ này.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleChatWindow() {
+            var chatWindow = document.getElementById("chatWindow");
+            // Toggle the visibility of the chat window
+            if (chatWindow.style.display === "none" || chatWindow.style.display === "") {
+                chatWindow.style.display = "flex";
+            } else {
+                chatWindow.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

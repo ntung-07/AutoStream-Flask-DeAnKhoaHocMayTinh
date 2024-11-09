@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>all_vehicles</title>
+    <link rel="stylesheet" href="../static/all_vehicles.css">   
+</head>
+<body>
+    <div>
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-logo" href="index.html">
+                        <img src="../static/images/autostream_logo.jpg" alt="AutoStream Logo">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="{{ url_for('index') }}">Trang chủ</a></li>
+                        <li><a href="{{ url_for('all_vehicles') }}">Tìm kiếm xe</a></li>
+                        <li><a href="{{ url_for('login') }}">Đăng nhập</a></li>
+                        <li><a href="{{ url_for('register') }}">Đăng ký</a></li>
+                        <li class="user-icon-container">
+                            <div class="chat-icon" onclick="toggleChatWindow()">
+                                <img src="../static/images/user.png" alt="">
+                            </div>
+                            <div id="chatWindow" class="chat-window">
+                                <div class="chat-header">
+                                    <span><strong>Tài khoản:</strong> {{ username }}</span>
+                                    <button onclick="toggleChatWindow()">X</button>
+                                </div>
+                                <div class="chat-content">
+                                    {% if fengshui and occupation %}
+                                    <p><strong>Mệnh:</strong> {{ fengshui }}</p>
+                                    <p><strong>Nghề nghiệp:</strong> {{ occupation }}</p>
+                                    {% else %}
+                                    <p>Vui lòng đăng nhập để được gợi ý!</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    
+    <div class="content-wrapper">
+        <!-- Phần tất cả các tin đăng -->
+        <section class="vehicle-listings-section">
+            <h2 id="section-title" class="section-title"></h2>
+            <div class="vehicle-grid" id="vehicle-grid">
+                <!-- Các vehicle tiles (3 cột) -->
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/toyota 2lander.jpg" alt="SUV Màu Xanh" class="vehicle-image">
+                    <h3 class="vehicle-name">Toyota Highlander</h3>
+                    <p class="vehicle-type">Loại xe: SUV</p>
+                    <p class="vehicle-color">Màu: Xanh</p>
+                </div>
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/accord.jpg" alt="Sedan Màu Đỏ" class="vehicle-image">
+                    <h3 class="vehicle-name">Honda Accord</h3>
+                    <p class="vehicle-type">Loại xe: Sedan</p>
+                    <p class="vehicle-color">Màu: Đỏ</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/ranger.jpg" alt="Truck Màu Trắng" class="vehicle-image">
+                    <h3 class="vehicle-name">Ford Ranger</h3>
+                    <p class="vehicle-type">Loại xe: Bán tải</p>
+                    <p class="vehicle-color">Màu: Trắng</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/merc.jpg" alt="Sedan Màu Đen" class="vehicle-image">
+                    <h3 class="vehicle-name">Mercedes-Benz C-Class</h3>
+                    <p class="vehicle-type">Loại xe: Sedan</p>
+                    <p class="vehicle-color">Màu: Đen</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/explorer.jpg" alt="SUV Màu Xanh Lá" class="vehicle-image">
+                    <h3 class="vehicle-name">Ford Explorer</h3>
+                    <p class="vehicle-type">Loại xe: SUV</p>
+                    <p class="vehicle-color">Màu: Xanh Lá</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/colorado.jpg" alt="Truck Màu Xanh" class="vehicle-image">
+                    <h3 class="vehicle-name">Chevrolet Colorado</h3>
+                    <p class="vehicle-type">Loại xe: Bán tải</p>
+                    <p class="vehicle-color">Màu: Xanh</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/cx5.jpg" alt="SUV Màu Đỏ" class="vehicle-image">
+                    <h3 class="vehicle-name">Mazda CX-5</h3>
+                    <p class="vehicle-type">Loại xe: SUV</p>
+                    <p class="vehicle-color">Màu: Đỏ</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/rio.jpg" alt="Hatchback Màu Vàng" class="vehicle-image">
+                    <h3 class="vehicle-name">Kia Rio</h3>
+                    <p class="vehicle-type">Loại xe: Hatchback</p>
+                    <p class="vehicle-color">Màu: Vàng</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/x5.jpg" alt="SUV Màu Đen" class="vehicle-image">
+                    <h3 class="vehicle-name">BMW X5</h3>
+                    <p class="vehicle-type">Loại xe: SUV</p>
+                    <p class="vehicle-color">Màu: Đen</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/navara.jpg" alt="Truck Màu Xám" class="vehicle-image">
+                    <h3 class="vehicle-name">Nissan Navara</h3>
+                    <p class="vehicle-type">Loại xe: Bán tải</p>
+                    <p class="vehicle-color">Màu: Xám</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/a4.jpg" alt="Sedan Màu Trắng" class="vehicle-image">
+                    <h3 class="vehicle-name">Audi A4</h3>
+                    <p class="vehicle-type">Loại xe: Sedan</p>
+                    <p class="vehicle-color">Màu: Trắng</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/fiesta.jpg" alt="Hatchback Màu Xanh" class="vehicle-image">
+                    <h3 class="vehicle-name">Ford Fiesta</h3>
+                    <p class="vehicle-type">Loại xe: Hatchback</p>
+                    <p class="vehicle-color">Màu: Xanh</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/lx570.jpg" alt="SUV Màu Vàng" class="vehicle-image">
+                    <h3 class="vehicle-name">Lexus LX 570</h3>
+                    <p class="vehicle-type">Loại xe: SUV</p>
+                    <p class="vehicle-color">Màu: Vàng</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/sonata.jpg" alt="Sedan Màu Xanh" class="vehicle-image">
+                    <h3 class="vehicle-name">Hyundai Sonata</h3>
+                    <p class="vehicle-type">Loại xe: Sedan</p>
+                    <p class="vehicle-color">Màu: Xanh</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/dmax.jpg" alt="Truck Màu Nâu" class="vehicle-image">
+                    <h3 class="vehicle-name">Isuzu D-Max</h3>
+                    <p class="vehicle-type">Loại xe: Bán tải</p>
+                    <p class="vehicle-color">Màu: Nâu</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/polo.jpg" alt="Hatchback Màu Đỏ" class="vehicle-image">
+                    <h3 class="vehicle-name">Volkswagen Polo</h3>
+                    <p class="vehicle-type">Loại xe: Hatchback</p>
+                    <p class="vehicle-color">Màu: Đỏ</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/jeep.jpg" alt="SUV Màu Xám" class="vehicle-image">
+                    <h3 class="vehicle-name">Jeep Grand Cherokee</h3>
+                    <p class="vehicle-type">Loại xe: SUV</p>
+                    <p class="vehicle-color">Màu: Xám</p>
+                </div>
+    
+                <div class="vehicle-tile">
+                    <img src="static/images/all_vehicles/camry.jpg" alt="Sedan Màu Xanh Lá" class="vehicle-image">
+                    <h3 class="vehicle-name">Toyota Camry</h3>
+                    <p class="vehicle-type">Loại xe: Sedan</p>
+                    <p class="vehicle-color">Màu: Xanh Lá</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phần xe gợi ý -->
+        <section class="suggested-vehicles-section">
+            <div class="suggested-vehicle-text">
+                <h2 class="suggested-section-title">Dành cho bạn</h2>
+            </div>
+            <div class="suggested-vehicle-list">
+                <!-- Các xe gợi ý sẽ được thêm vào đây, 1 tile mỗi dòng -->
+            </div>
+        </section>
+    </div>
+
+    <script type="text/javascript">
+        const userFengshui = "{{ fengshui | safe }}";
+        const userOccupation = "{{ occupation | safe }}";
+    </script>
+    <script src="../static/js/all_vehicles.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+body {
+    font-family: 'Verdana', sans-serif;
+    color: #444a57;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/images/background-image.jpg');
+    background-position: center;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex; /* Use flexbox for side-by-side layout */
+    padding: 20px;
+}
+
+.car-image {
+    max-width: 400px;
+    max-height: 250px;
+    border-radius: 5px;
+    margin-right: 20px; /* Space between image and details */
+}
+
+.car-details {
+    flex: 2; /* Allow details to take more space */
+    text-align: left; /* Align text to the left */
+}
+
+.car-details h1 {
+    margin: 0;
+}
+
+.car-specs {
+    margin-top: 20px;
+}
+
+.car-specs h2 {
+    border-bottom: 2px solid #4e4ffa;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    color: #4e4ffa;
+}
+
+.back-button {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4e4ffa;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.back-button:hover {
+    background-color: #0102fa;
+}
+
+.reviews {
+    margin-top: 30px;
+}
+
+.review {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.review:last-child {
+    border-bottom: none;
+}
+
+.review h4 {
+    margin: 0;
+    color: #4e4ffa;
+}
+
+.review p {
+    margin: 5px 0;
+    color: #666;
+}
+
+
+.verification-status {
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #444a57;
+}
+
+.verification-status img {
+    width: 100px;
+    height: 50px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.back-button {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4e4ffa;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+    margin-right: 10px; /* Khoảng cách giữa hai nút */
+}
+
+.back-button:hover {
+    background-color: #0102fa;
+}

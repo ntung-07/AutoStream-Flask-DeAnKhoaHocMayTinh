@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, black, #545454);
+  overflow: hidden;
+}
+
+.page-wrapper {
+  width: 100%;
+  padding: 40px;
+}
+
+.content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  background: #ffffff;
+  min-height: 100vh; 
+  padding-bottom: 100vh;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.info-section {
+  flex: 1;
+  text-align: left;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.service-guide {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.form-card {
+  flex: 1;
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff, #ffffff);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-label {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #ffffff;
+  font-size: 1rem;
+  color: #333;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.form-input:focus {
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #6a64f1;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.submit-btn:hover {
+  background: #524bb0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Logo Styling */
+.logo-container {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.logo {
+  width: 20%;
+  height: 20%;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  border-radius: 10px;
+}
+
+.logo-container p {
+  font-size: 15px;
+  color: #6c6c6c;
+  font-weight: 780;
+}
+
+.logo:hover {
+  opacity: 1;
+}
+
+/* Phần còn lại vẫn giữ nguyên */

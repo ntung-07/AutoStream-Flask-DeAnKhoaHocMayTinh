@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
+    <title>Porsche GT3 RS New - Detailed Listing</title>
+    <link rel="stylesheet" href="../static/detail-of-listing.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="car-image-wrapper">
+            <img src="../static/images/porsche-gt3-rs.jpg" alt="Porsche GT3 RS" class="car-image" />
+
+            <div class="verification-status">
+            <p>Trạng thái xác thực: <img src="../static/images/certified-mark.jpg" alt="Verified Status"></p>
+            </div>
+        </div>
+
+        <div class="car-details">
+            <h1>Porsche GT3 RS</h1>
+            <div class="car-specs">
+                <h2>Thông tin chi tiết</h2>
+                <p><strong>Giá bán:</strong> 13 Tỷ 950 Triệu</p>
+                <p><strong>Năm sản xuất:</strong> 2022</p>
+                <p><strong>Odo:</strong> 0 km</p>
+                <p><strong>Động cơ:</strong> 4.0L 6-cylinder Boxer</p>
+                <p><strong>Hộp số:</strong> PDK Transmission</p>
+                <p><strong>Màu sắc:</strong> Đen Jet Black</p>
+            </div>
+
+            <div>
+                <p><strong>Vehicle ID:</strong> <span id="vehicle-id">BlackGT3RS</span></p>
+                <p><strong>Listing ID:</strong> <span id="listing-id">Listing-003</span></p>
+            </div>
+
+            <a href="#" class="back-button" id="inspect-button">Kiểm định xe</a>
+            <a href="#" class="back-button" id="reserve-button">Đặt cọc</a>
+
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('inspect-button').onclick = function() {
+        // Get the vehicle ID and listing ID from the page
+        const vehicleId = document.getElementById('vehicle-id').innerText;
+        const listingId = document.getElementById('listing-id').innerText;
+
+        // Construct the URL for the inspection form
+        const url = `{{ url_for('car_inspection_form') }}?vehicle_id=${vehicleId}&listing_id=${listingId}`;
+
+        // Redirect to the inspection form
+        window.location.href = url;
+        };
+
+        document.getElementById('reserve-button').onclick = function() {
+        // Lấy vehicle ID và listing ID từ trang
+        const vehicleId = document.getElementById('vehicle-id').innerText;
+        const listingId = document.getElementById('listing-id').innerText;
+
+        // Tạo URL cho trang chốt cọc
+        const url = `{{ url_for('down_payment') }}?vehicle_id=${vehicleId}&listing_id=${listingId}`;
+
+        // Chuyển hướng tới trang chốt cọc
+        window.location.href = url;
+    };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Inspection</title>
+    <link rel="stylesheet" href="static/confirmation.css">
+</head>
+<body>
+    <div class="confirmation-container">
+        <p id="status-text">Người bán đang xác nhận...</p>
+        <div id="loading-icon" class="spinner"></div>
+        <div id="check-icon" class="check-mark">&#10003;</div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById("status-text").innerText = "Người bán đồng ý kiểm định";
+            document.getElementById("loading-icon").style.display = "none";
+            document.getElementById("check-icon").style.display = "inline-block";
+
+            // Redirect to the next site after a short delay
+            setTimeout(() => {
+                window.location.href = "{{ url_for('checkout') }}";
+            }, 1500);
+        }, 3000); // 3-second delay
+    </script>
+</body>
+</html>

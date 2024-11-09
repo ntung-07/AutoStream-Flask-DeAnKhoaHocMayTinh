@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/login.css">
+    <title>Đăng nhập</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logo và thông tin reCAPTCHA + Form đăng nhập bên dưới -->
+        <div class="left">
+            <div class="logo">
+                <img src="/static/images/autostream_logo.jpg" alt="Logo">
+            </div>
+            <div class="recaptcha-info">
+                <p>Trang web được bảo mật bởi Google reCAPTCHA.</p>
+            </div>
+            <div class="login-form">
+                <form action="{{ url_for('login') }}" method="POST">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" name="username" required placeholder="">
+                    
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" required placeholder="">
+                    
+                    <button type="submit" class="login-btn">Đăng nhập</button>
+
+                    <p class="register-link">Chưa có tài khoản? <a href="{{ url_for('register') }}">Đăng ký ngay</a></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Ảnh nền bên phải -->
+        <div class="right">
+            <img src="/static/images/login-background.jpg" alt="Background">
+        </div>
+    </div>
+</body>
+
+</html>

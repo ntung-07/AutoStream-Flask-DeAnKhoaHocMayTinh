@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký kiểm định xe</title>
+    <link rel="stylesheet" href="../static/car_inspection_form.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h1 class="form-title">Đăng ký kiểm định xe</h1>
+                <p class="form-subtitle">Hoàn tất thông tin sau đây để yêu cầu kiểm định</p>
+                <div class="logo-container">
+                  <img src="../static/images/inspection-logo.jpg" alt="Logo" class="logo">
+                  <p>Dịch vụ kiểm định xe Autostream giúp bạn an tâm trên mọi hành trình. 
+                    Chúng tôi cam kết mang lại sự an toàn và chất lượng cao nhất cho phương 
+                    tiện của bạn, đảm bảo rằng mọi chi tiết kỹ thuật đều được kiểm tra tỉ mỉ. 
+                  </p>
+                </div>
+            </div>
+            
+            <form method="POST" class="form-card">
+                <div class="form-group">
+                    <label for="vehicle_id" class="form-label">Đối với mã số xe</label>
+                    <input type="text" id="vehicle_id" class="form-input" readonly value="{{ vehicle_id }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="listing_id" class="form-label">Mã tin đăng</label>
+                    <input type="text" id="listing_id" class="form-input" readonly value="{{ listing_id }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="inspection_unit" class="form-label">Chọn đơn vị kiểm định</label>
+                    <select id="inspection_unit" class="form-input">
+                        <option disabled selected>Chọn đơn vị kiểm định</option>
+                        <option>LT9 Performance</option>
+                        <option>N22 Service</option>
+                        <option>Sumo Racing Oil</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Hòm thư nhận kết quả</label>
+                    <input type="email" id="email" class="form-input" placeholder="Nhập email">
+                </div>
+
+                <button type="submit" class="submit-btn">Gửi yêu cầu</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

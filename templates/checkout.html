@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thanh toán dịch vụ</title>
+  <link rel="stylesheet" href="../static/checkout.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="content-wrapper">
+      <div class="info-section">
+        <h1 class="form-title">Cổng thanh toán dịch vụ</h1>
+        <p class="form-subtitle">Thanh toán và hoàn tất lập hồ sơ kiểm định.</p>
+        <div class="logo-container">
+          <img src="/static/images/gate-84.png" alt="Product Logo" class="logo">
+        </div>
+      </div>
+      <form action="{{ url_for('checkout') }}" class="form-card" method = "POST">
+        <div class="form-group">
+          <label for="name" class="form-label">Tên chủ thẻ</label>
+          <input type="text" id="name" class="form-input" name="name" >
+        </div>
+        <div class="form-group">
+          <label for="card_number" class="form-label">Số thẻ</label>
+          <input type="text" id="card_number" class="form-input" name="card_number" >
+        </div>
+        <div class="form-group">
+          <label for="card_type" class="form-label">Loại thẻ</label>
+          <select id="card_type" class="form-input" name="card_type" >
+            <option value="">--Chọn loại thẻ--</option>
+            <option value="Visa">Visa</option>
+            <option value="Napas">Napas</option>
+            <option value="MasterCard">MasterCard</option>
+          </select>
+        </div>
+        <div class="form-group-expcvv">
+          <div class="expiration">
+            <label for="exp_date" class="form-label">Hạn thẻ</label>
+            <input type="date" id="exp_date" class="form-input" name="exp_date" >
+          </div>
+          <div class="amount-display">
+            <label for="amount" class="form-label">Số tiền thanh toán</label>
+            <input type="text" class="form-input" name="amount" id="amount" value="1.080.000 VND" readonly />
+          </div>
+        </div>
+        <div>
+          <label for="cvv" class="form-label">CVV</label>
+          <input type="password" id="cvv" class="form-input" name="cvv" >
+        </div>
+        <button type="submit" class="submit-btn">Thanh toán</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

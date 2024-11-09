@@ -1,0 +1,113 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
+        <title>Home - AutoStream</title>
+        <link rel="stylesheet" href="static/indexcss/bootstrap.min.css">
+		<link rel="stylesheet" href="static/indexcss/bootsnav.css" >
+        <link rel="stylesheet" href="static/indexcss/style.css">
+        <link rel="stylesheet" href="static/indexcss/responsive.css">
+    </head>
+	<body>
+		<section id="home" class="welcome-hero">
+			<div class="top-area">
+				<div class="header-area">
+				    <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+				        <div class="container">
+				            <div class="navbar-header">
+				                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+				                    <i class="fa fa-bars"></i>
+				                </button>
+				                <a class="navbar-logo" href="index.html">
+									<img src="static/images/autostream_logo.jpg" alt="AutoStream Logo"">
+								</a>
+				            </div>
+				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+				                    <li class=" scroll active"><a href="#home">Trang chủ</a></li>
+				                    <li class="scroll"><a href="{{ url_for('all_vehicles') }}">Tìm kiếm xe</a></li>
+				                    <li class="scroll"><a href="{{ url_for('login') }}">Đăng nhập</a></li>
+				                    <li class="scroll"><a href="{{ url_for('register') }}">Đăng ký</a></li>
+				                </ul>
+				            </div>
+				        </div>
+				    </nav>
+
+					{% if session['name'] %}
+						<div class="welcome-session">
+							<span>Welcome, {{ session['name'] }}!</span>
+							<a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+						</div>
+					{% endif %}
+
+				</div>
+			    <div class="clearfix"></div>
+
+			</div>
+
+			<div class="container">
+				<div class="welcome-hero-txt">
+					<h2></h2>
+
+					<button class="welcome-btn" onclick="window.location.href='#'">
+
+					</button>
+
+				</div>
+
+			</div>
+		</section>
+
+		<section id="featured-cars" class="homepage-car-listing-section">
+			<div class="container">
+				<h2 class="homepage-section-title">Tin bán xe nổi bật</h2>
+
+				<div class="homepage-car-listing-grid">
+
+					<div class="homepage-car-tile">
+						<a href="{{url_for('detail_of_listing')}}">
+							<img src="static/images/toyota-camry-2022-2.0q-đỏ-3t3.jpg" alt="Car Image" class="homepage-car-image" />
+							<h3 class="homepage-car-name">Toyota Camry</h3>
+							<p class="homepage-car-price">1 Tỷ 249 Triệu</p>
+							<p class="homepage-car-details">Năm: 2022 | Odo: 30,000 km</p>
+						</a>
+					</div>
+
+					<div class="homepage-car-tile">
+						<a href="{{url_for('detail_of_listing')}}">
+							<img src="static/images/honda-accord.jpg" alt="Car Image" class="homepage-car-image" />
+							<h3 class="homepage-car-name">Honda Accord</h3>
+							<p class="homepage-car-price">850 Triệu</p>
+							<p class="homepage-car-details">Năm: 2021 | Odo: 12,000 km</p>
+						</a>
+					</div>
+
+					<div class="homepage-car-tile">
+						<a href="{{url_for('detail_of_listing')}}">
+							<img src="static/images/porsche-gt3-rs.jpg" alt="Car Image" class="homepage-car-image" />
+							<h3 class="homepage-car-name">Porsche GT3 RS</h3>
+							<p class="homepage-car-price">13 Tỷ 950 Triệu</p>
+							<p class="homepage-car-details">Đời: 2021 | Odo: 0 miles</p>
+						</a>
+					</div>
+
+					<div class="homepage-car-tile">
+						<a href="{{url_for('detail_of_listing')}}">
+							<img src="static/images/honda-dream.jpg" alt="Car Image" class="homepage-car-image" />
+							<h3 class="homepage-car-name">Honda Dream</h3>
+							<p class="homepage-car-price">55 Triệu</p>
+							<p class="homepage-car-details">Năm: 1990 | Odo: 1000 km</p>
+						</a>
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+
+	</body>
+</html>
+			

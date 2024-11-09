@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Verdana, sans-serif;
+    background-color: #f4f4f9;
+}
+
+.confirmation-container {
+    text-align: center;
+}
+
+#status-text {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.spinner, .check-mark {
+    font-size: 50px;
+    color: #4e4ffa;
+    display: inline-block;
+}
+
+.spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #4e4ffa;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+.check-mark {
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
