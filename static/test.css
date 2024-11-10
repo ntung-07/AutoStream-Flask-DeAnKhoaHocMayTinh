@@ -1,54 +1,64 @@
-body {
-    background-color: black;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+.welcome-hero {
+    position: relative;
+    background: url('/static/images/login-background.jpg') no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 1;
+    height: 90vh;
 }
 
-.chat-icon {
-    font-size: 2rem;
-    cursor: pointer;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+.welcome-hero:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.98) 100%);
+    z-index: 2;
 }
 
-.chat-window {
-    position: fixed;
-    bottom: 70px;
-    right: 20px;
-    width: 300px;
-    height: 400px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    display: none;
-    flex-direction: column;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.header-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
 }
 
-.chat-header {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.welcome-hero-txt {
+    text-align: center;
+    padding: 290px 0 372px;
 }
 
-.chat-content {
-    padding: 15px;
-    overflow-y: auto;
-    flex-grow: 1;
+.welcome-hero-txt h2 {
+    font-size: 42px;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 45px;
 }
 
-button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
+.welcome-hero-txt p {
+    font-size: 18px;
+    text-transform: initial;
+    color: #fff;
+    font-weight: 500;
+    max-width: 735px;
+    margin: 0 auto;
+}
+
+.welcome-btn {
+    display: inline-block;
+    width: 230px;
+    height: 60px;
+    background: transparent;
+    color: #fff;
+    border-radius: 3px;
+    margin-top: 55px;
+    transition: 0.3s linear;
+}
+
+.welcome-btn:hover {
+    background: #0102fa;
 }

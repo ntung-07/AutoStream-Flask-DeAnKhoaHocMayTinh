@@ -10,62 +10,94 @@
 </head>
 <body>
 
+    <!-- Navbar -->
+    <div class="navbar">
+        <img src="../static/images/autostream_logo.jpg" alt="Logo" class="logo">
+        <div class="navbar-links">
+            <a href="{{ url_for('index') }}" class="nav-button">Trang chủ</a>
+            <a href="{{ url_for('all_vehicles') }}" class="nav-button">Tìm kiếm xe</a>
+            <a href="{{ url_for('login') }}" class="nav-button">Đăng nhập</a>
+            <a href="{{ url_for('register') }}" class="nav-button">Đăng ký</a>
+        </div>
+    </div>
+
     <div class="container">
         <div class="car-image-wrapper">
             <img src="../static/images/porsche-gt3-rs.jpg" alt="Porsche GT3 RS" class="car-image" />
 
             <div class="verification-status">
-            <p>Trạng thái xác thực: <img src="../static/images/certified-mark.jpg" alt="Verified Status"></p>
+            <p>Trạng thái xác thực: <img src="../static/images/security.png" alt="Verified Status"></p>
             </div>
         </div>
 
         <div class="car-details">
-            <h1>Porsche GT3 RS</h1>
-            <div class="car-specs">
-                <h2>Thông tin chi tiết</h2>
-                <p><strong>Giá bán:</strong> 13 Tỷ 950 Triệu</p>
-                <p><strong>Năm sản xuất:</strong> 2022</p>
-                <p><strong>Odo:</strong> 0 km</p>
-                <p><strong>Động cơ:</strong> 4.0L 6-cylinder Boxer</p>
-                <p><strong>Hộp số:</strong> PDK Transmission</p>
-                <p><strong>Màu sắc:</strong> Đen Jet Black</p>
-            </div>
+            <div class="actual-car-details">
+                <h1>Porsche GT3 RS</h1>
+                <div class="car-specs">
+                    <h2>Thông tin chi tiết</h2>
+                    <p><strong>Giá bán:</strong> 13 Tỷ 950 Triệu</p>
+                    <p><strong>Năm sản xuất:</strong> 2022</p>
+                    <p><strong>Odo:</strong> 0 km</p>
+                    <p><strong>Động cơ:</strong> 4.0L 6-cylinder Boxer</p>
+                    <p><strong>Hộp số:</strong> PDK Transmission</p>
+                    <p><strong>Màu sắc:</strong> Đen Jet Black</p>
+                </div>
 
-            <div>
-                <p><strong>Vehicle ID:</strong> <span id="vehicle-id">BlackGT3RS</span></p>
-                <p><strong>Listing ID:</strong> <span id="listing-id">Listing-003</span></p>
-            </div>
+                <div>
+                    <p><strong>Vehicle ID:</strong> <span id="vehicle-id">BlackGT3RS</span></p>
+                    <p><strong>Listing ID:</strong> <span id="listing-id">Listing-003</span></p>
+                </div>
 
-            <a href="#" class="back-button" id="inspect-button">Kiểm định xe</a>
-            <a href="#" class="back-button" id="reserve-button">Đặt cọc</a>
+                <a href="#" class="back-button" id="inspect-button">Kiểm định xe</a>
+                <a href="#" class="back-button" id="reserve-button">Đặt cọc</a>
+        
+            </div>
+            
+            <div class="development-box">
+                <p>Đang phát triển</p>
+            </div>
 
         </div>
     </div>
 
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>AutoStream</h2>
+                <p>Chuyên cung cấp các dòng xe cao cấp.</p>
+            </div>
+            <div class="footer-section contact">
+                <h2>Liên hệ</h2>
+                <p>Địa chỉ: 12 Nguyễn Sơn, Long Biên, TP. Hà Nội</p>
+                <p>Email: contact@autostream.com</p>
+                <p>Điện thoại: +84 959 558 885</p>
+            </div>
+            <div class="footer-section social">
+                <h2>Kết nối với chúng tôi</h2>
+                <a href="#"><img src="../static/images/facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="../static/images/instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="../static/images/twitter-icon.png" alt="Twitter"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 AutoStream | Tất cả quyền được bảo lưu.
+        </div>
+    </footer>
+
     <script>
         document.getElementById('inspect-button').onclick = function() {
-        // Get the vehicle ID and listing ID from the page
-        const vehicleId = document.getElementById('vehicle-id').innerText;
-        const listingId = document.getElementById('listing-id').innerText;
-
-        // Construct the URL for the inspection form
-        const url = `{{ url_for('car_inspection_form') }}?vehicle_id=${vehicleId}&listing_id=${listingId}`;
-
-        // Redirect to the inspection form
-        window.location.href = url;
+            const vehicleId = document.getElementById('vehicle-id').innerText;
+            const listingId = document.getElementById('listing-id').innerText;
+            const url = `{{ url_for('car_inspection_form') }}?vehicle_id=${vehicleId}&listing_id=${listingId}`;
+            window.location.href = url;
         };
 
         document.getElementById('reserve-button').onclick = function() {
-        // Lấy vehicle ID và listing ID từ trang
-        const vehicleId = document.getElementById('vehicle-id').innerText;
-        const listingId = document.getElementById('listing-id').innerText;
-
-        // Tạo URL cho trang chốt cọc
-        const url = `{{ url_for('down_payment') }}?vehicle_id=${vehicleId}&listing_id=${listingId}`;
-
-        // Chuyển hướng tới trang chốt cọc
-        window.location.href = url;
-    };
+            const vehicleId = document.getElementById('vehicle-id').innerText;
+            const listingId = document.getElementById('listing-id').innerText;
+            const url = `{{ url_for('down_payment') }}?vehicle_id=${vehicleId}&listing_id=${listingId}`;
+            window.location.href = url;
+        };
     </script>
 
 </body>

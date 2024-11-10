@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="static/confirmation.css">
 </head>
 <body>
+    <p id="fee" style="display: none;">{{ fee }}</p>
+    <p id="service" style="display: none;">{{ service }}</p>
     <div class="confirmation-container">
         <p id="status-text">Đang xử lý...</p>
         <div id="loading-icon" class="spinner"></div>
@@ -19,9 +21,13 @@
             document.getElementById("loading-icon").style.display = "none";
             document.getElementById("check-icon").style.display = "inline-block";
 
+            const fee = document.getElementById('fee').innerText;
+            const service = document.getElementById('service').innerText;
+            const url = `{{ url_for('invoice') }}?fee=${encodeURIComponent(fee)}&service=${encodeURIComponent(service)}`;
+
             // Redirect to the next site after a short delay
             setTimeout(() => {
-                window.location.href = "{{ url_for('invoice') }}";
+                window.location.href = url;
             }, 1500);
         }, 3000); // 3-second delay
     </script>

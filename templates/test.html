@@ -1,38 +1,201 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Window Example</title>
-    <link rel="stylesheet" href="../static/test.css">
-</head>
-<body>
-    <!-- Icon -->
-    <div class="chat-icon" onclick="toggleChatWindow()">💬</div>
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
+        <title>Listing Detail</title>
+        <link rel="stylesheet" href="../static/indexcss/bootstrap.min.css">
+		<link rel="stylesheet" href="../static/indexcss/bootsnav.css" >
+        <link rel="stylesheet" href="../static/indexcss/style.css">
+        <link rel="stylesheet" href="../static/indexcss/responsive.css">
+    </head>
+	<body>
+		<section id="home" class="welcome-hero">
+			<div class="top-area">
+				<div class="header-area">
+				    <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+				        <div class="container">
+				            <div class="navbar-header">
+				                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+				                    <i class="fa fa-bars"></i>
+				                </button>
+				                <a class="navbar-logo" href="index.html">
+									<img src="static/images/autostream_logo.jpg" alt="AutoStream Logo"">
+								</a>
+				            </div>
+				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+				                    <li class=" scroll active"><a href="#home">Trang chủ</a></li>
+				                    <li class="scroll"><a href="{{ url_for('all_vehicles') }}">Tìm kiếm xe</a></li>
+				                    <li class="scroll"><a href="{{ url_for('login') }}">Đăng nhập</a></li>
+				                    <li class="scroll"><a href="{{ url_for('register') }}">Đăng ký</a></li>
+				                </ul>
+				            </div>
+				        </div>
+				    </nav>
 
-    <!-- Chat window -->
-    <div id="chatWindow" class="chat-window">
-        <div class="chat-header">
-            <span>Chat</span>
-            <button onclick="toggleChatWindow()">X</button>
-        </div>
-        <div class="chat-content">
-            <p>Xin chào! Cần giúp đỡ gì không?</p>
-            <p>Đây là một tin nhắn ngẫu nhiên.</p>
-            <p>Hãy bấm vào icon để đóng cửa sổ này.</p>
-        </div>
-    </div>
+					{% if session['name'] %}
+						<div class="welcome-session">
+							<span>Welcome, {{ session['name'] }}!</span>
+							<a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+						</div>
+					{% endif %}
 
-    <script>
-        function toggleChatWindow() {
-            var chatWindow = document.getElementById("chatWindow");
-            // Toggle the visibility of the chat window
-            if (chatWindow.style.display === "none" || chatWindow.style.display === "") {
-                chatWindow.style.display = "flex";
-            } else {
-                chatWindow.style.display = "none";
-            }
-        }
-    </script>
-</body>
+				</div>
+			    <div class="clearfix"></div>
+
+			</div>
+
+			<div class="container">
+				<div class="welcome-hero-txt">
+					<h2></h2>
+
+					<button class="welcome-btn" onclick="window.location.href='#'">
+
+					</button>
+
+				</div>
+
+			</div>
+		</section>
+
+		<div class="container">
+            <div class="car-image-wrapper">
+                <img src="../static/images/porsche-gt3-rs.jpg" alt="Porsche GT3 RS" class="car-image" />
+    
+                <div class="verification-status">
+                <p>Trạng thái xác thực: <img src="../static/images/certified-mark.jpg" alt="Verified Status"></p>
+                </div>
+            </div>
+    
+            <div class="car-details">
+                <h1>Porsche GT3 RS</h1>
+                <div class="car-specs">
+                    <h2>Thông tin chi tiết</h2>
+                    <p><strong>Giá bán:</strong> 13 Tỷ 950 Triệu</p>
+                    <p><strong>Năm sản xuất:</strong> 2022</p>
+                    <p><strong>Odo:</strong> 0 km</p>
+                    <p><strong>Động cơ:</strong> 4.0L 6-cylinder Boxer</p>
+                    <p><strong>Hộp số:</strong> PDK Transmission</p>
+                    <p><strong>Màu sắc:</strong> Đen Jet Black</p>
+                </div>
+    
+                <div>
+                    <p><strong>Vehicle ID:</strong> <span id="vehicle-id">BlackGT3RS</span></p>
+                    <p><strong>Listing ID:</strong> <span id="listing-id">Listing-003</span></p>
+                </div>
+    
+                <a href="#" class="back-button" id="inspect-button">Kiểm định xe</a>
+                <a href="#" class="back-button" id="reserve-button">Đặt cọc</a>
+    
+            </div>
+        </div>
+
+        <style>
+            body {
+    font-family: 'Verdana', sans-serif;
+    color: #444a57;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/images/background-image.jpg');
+    background-position: center;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex; /* Use flexbox for side-by-side layout */
+    padding: 20px;
+}
+
+.car-image {
+    max-width: 400px;
+    max-height: 250px;
+    border-radius: 5px;
+    margin-right: 20px; /* Space between image and details */
+}
+
+.car-details {
+    flex: 2; /* Allow details to take more space */
+    text-align: left; /* Align text to the left */
+}
+
+.car-details h1 {
+    margin: 0;
+}
+
+.car-specs {
+    margin-top: 20px;
+}
+
+.car-specs h2 {
+    border-bottom: 2px solid #4e4ffa;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    color: #4e4ffa;
+}
+
+.back-button {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4e4ffa;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+    margin-right: 10px; /* Space between buttons */
+}
+
+.back-button:hover {
+    background-color: #0102fa;
+}
+
+.reviews {
+    margin-top: 30px;
+}
+
+.review {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.review:last-child {
+    border-bottom: none;
+}
+
+.review h4 {
+    margin: 0;
+    color: #4e4ffa;
+}
+
+.review p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.verification-status {
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #444a57;
+}
+
+.verification-status img {
+    width: 100px;
+    height: 50px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+        </style>
+
+	</body>
 </html>
+			

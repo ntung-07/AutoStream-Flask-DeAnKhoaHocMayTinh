@@ -1,5 +1,4 @@
 from wsgiref.util import request_uri
-
 from flask import Flask, render_template, request, session, url_for, flash
 from datetime import datetime
 from pymongo import MongoClient
@@ -53,7 +52,6 @@ def register():
             return render_template("register.html")
     return render_template("register.html")
 
-# Sign in
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -75,33 +73,24 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
-@app.route('/detail_of_listing')
-def detail_of_listing():
-    return render_template('detail-of-listing.html')
-
-@app.route('/car-inspection', methods = ['GET', 'POST'])
-def car_inspection_form():
-    if request.method == 'POST':
-        return redirect(url_for('confirmation'))
-
-    vehicle_id = request.args.get('vehicle_id')
-    listing_id = request.args.get('listing_id')
-
-    return render_template('car_inspection_form.html',
-                           vehicle_id = vehicle_id, listing_id = listing_id)
-
-@app.route('/confirmation', methods = ['GET', 'POST'])
-def confirmation():
-    return render_template('confirmation.html')
-
-@app.route('/checkout', methods = ['GET', 'POST'])
-def checkout():
-    if request.method == "POST":
-        return redirect(url_for('confirmation_2'))
-
-    return render_template('checkout.html')
+#-------------------------------------------------------------
+# Vehicle searching site acts as vehicle_suggestion_algorithm.
+#-------------------------------------------------------------
+@app.route('/all_vehicles')
+def all_vehicles():
+    username = session.get("username")
+    fengshui = fengshui_determination()
+    occupation = get_user_occupation()
+    gender = get_user_gender()
+    family_size = get_user_family_size()
+    budget = get_user_budget()
+    return render_template('all_vehicles.html',
+                           fengshui = fengshui, occupation = occupation, 
+                           username = username, gender = gender, 
+                           family_size = family_size, 
+                           budget = budget)
 
 def get_dob_from_database():
     username = session.get('username')
@@ -124,16 +113,21 @@ def fengshui_determination():
     if not dob:
         return "Vui lòng đăng nhập để sử dụng chức năng."
     birth_year = dob.year
+    can = birth_year % 10
 
-    # This is for testing only. Official program will require a formula.
-    if birth_year == 2004:
-        return 'Mệnh Thủy'
-    elif birth_year == 1978:
-        return 'Mệnh Hỏa'
-    elif birth_year == 1920:
-        return "Mệnh Mộc"
-    else:
-        return "Under development.."
+     # Mapping Thiên Can
+    if can in [0, 1]:  # Canh, Tân
+        element_can = "Kim"
+    elif can in [2, 3]:  # Nhâm, Quý
+        element_can = "Thủy"
+    elif can in [4, 5]:  # Giáp, Ất
+        element_can = "Mộc"
+    elif can in [6, 7]:  # Bính, Đinh
+        element_can = "Hỏa"
+    else:  # Mậu, Kỷ
+        element_can = "Thổ"
+
+    return f"Mệnh {element_can}"
 
 def get_user_occupation():
     username = session.get('username')
@@ -149,14 +143,73 @@ def get_user_occupation():
             return None
     else:
         return None
+    
+def get_user_gender():
+    username = session.get('username')
+    if not username:
+        return None
 
-@app.route('/all_vehicles')
-def all_vehicles():
-    username = session.get("username")
-    fengshui = fengshui_determination()
-    occupation = get_user_occupation()
-    return render_template('all_vehicles.html',
-                           fengshui = fengshui, occupation = occupation, username = username)
+    user = users_collection.find_one({"username": username}, {"gender": 1})
+
+    if user and "gender" in user:
+        try:
+            return user["gender"]
+        except ValueError:
+            return None
+    else:
+        return None
+    
+def get_user_family_size():
+    username = session.get('username')
+    if not username:
+        return None
+
+    user = users_collection.find_one({"username": username}, {"family_size": 1})
+
+    if user and "family_size" in user:
+        try:
+            return user["family_size"]
+        except ValueError:
+            return None
+    else:
+        return None
+    
+def get_user_budget():
+    username = session.get('username')
+    if not username:
+        return None
+
+    user = users_collection.find_one({"username": username}, {"maximum_budget": 1})
+
+    if user and "maximum_budget" in user:
+        try:
+            return user["maximum_budget"]
+        except ValueError:
+            return None
+    else:
+        return None
+
+#-------------------------------------------------------------
+# Vehicle searching site acts as vehicle_suggestion_algorithm.
+#-------------------------------------------------------------
+
+#-------------------------------------------------------------------------------------
+# Listing details site then proceeds to Car_inpection_service and Down_payment_service.
+#-------------------------------------------------------------------------------------
+@app.route('/detail_of_listing')
+def detail_of_listing():
+    return render_template('detail-of-listing.html')
+
+@app.route('/car-inspection', methods = ['GET', 'POST'])
+def car_inspection_form():
+    if request.method == 'POST':
+        return redirect(url_for('confirmation'))
+
+    vehicle_id = request.args.get('vehicle_id')
+    listing_id = request.args.get('listing_id')
+
+    return render_template('car_inspection_form.html',
+                           vehicle_id = vehicle_id, listing_id = listing_id)
 
 @app.route('/down_payment_form', methods = ['GET', 'POST'])
 def down_payment():
@@ -165,19 +218,41 @@ def down_payment():
 
     vehicle_id = request.args.get('vehicle_id')
     listing_id = request.args.get('listing_id')
+
     return render_template('down_payment.html', vehicle_id=vehicle_id, listing_id=listing_id)
+
+@app.route('/checkout', methods = ['GET', 'POST'])
+def checkout():
+    
+    fee = request.args.get('fee')
+    service = request.args.get('service')
+
+    return render_template('checkout.html', fee = fee, service = service)
 
 @app.route('/invoice')
 def invoice():
-    return render_template("invoice.html")
+    fee = request.args.get('fee')
+    service = request.args.get('service')
+
+    return render_template("invoice.html", fee = fee, service = service)
+
+@app.route('/confirmation', methods = ['GET', 'POST'])
+def confirmation():
+    return render_template('confirmation.html')
 
 @app.route('/confirmation2', methods = ['GET', 'POST'])
 def confirmation_2():
-    return render_template('confirmation_2.html')
+    fee = request.args.get('fee')
+    service = request.args.get('service')
+
+    return render_template('confirmation_2.html', fee = fee, service = service)
 
 @app.route('/confirmation_3', methods = ['GET', 'POST'])
 def confirmation_3():
-    return render_template("confirmation_3.html")
+    fee = request.args.get('fee')
+    service = request.args.get('service')
+
+    return render_template("confirmation_3.html", fee = fee, service = service)
 
 if __name__ == "__main__":
     app.run(debug = True)

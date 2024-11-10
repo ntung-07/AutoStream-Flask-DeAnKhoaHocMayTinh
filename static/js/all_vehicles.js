@@ -26,13 +26,50 @@ function getVehicleTypesByOccupation(occupation) {
     }
 }
 
+function getVehicleTypesByGender(gender) {
+    switch (gender) {
+        case 'Nam':
+            return ['SUV', 'Bán tải'];  // Giới tính nam thường chọn các loại xe mạnh mẽ
+        case 'Nữ':
+            return ['Sedan', 'Hatchback'];  // Giới tính nữ có thể chọn xe nhẹ nhàng hơn
+        default:
+            return [];
+    }
+}
+
+function getVehicleTypesByFamilySize(familySize) {
+    if (familySize <= 2) {
+        return ['Sedan', 'Hatchback'];  // Quy mô gia đình nhỏ có thể chọn sedan hoặc hatchback
+    } else {
+        return ['SUV', 'Bán tải'];  // Gia đình lớn hơn sẽ thích xe rộng rãi như SUV hoặc bán tải
+    }
+}
+
+function getSuggestedVehicleTypes(occupation, gender, familySize) {
+    // Lấy vehicle types từ nghề nghiệp, giới tính và quy mô gia đình
+    let occupationTypes = getVehicleTypesByOccupation(occupation);
+    let genderTypes = getVehicleTypesByGender(gender);
+    let familySizeTypes = getVehicleTypesByFamilySize(familySize);
+
+    // Kết hợp tất cả các loại xe, ưu tiên nghề nghiệp hơn
+    let suggestedTypes = [...new Set([
+        ...occupationTypes,
+        ...genderTypes,
+        ...familySizeTypes
+    ])];
+
+    return suggestedTypes;
+}
+
 //let userFengshui = "{{ fengshui | safe }}";
 //let userOccupation = "{{ occupation | safe }}";
+//let userGender = "{{ gender | safe }}";
+//let userFamilySize = "{{ family_size | safe }}";
 
 console.log(userFengshui, userOccupation)
 
 let matchingColors = getColorsByFengshui(userFengshui);
-let matchingTypes = getVehicleTypesByOccupation(userOccupation);
+let matchingTypes = getSuggestedVehicleTypes(userOccupation, userGender, userFamilySize);
 
 const vehicles = document.querySelectorAll('.vehicle-tile');
 let filteredVehicles = [];
@@ -58,7 +95,8 @@ filteredVehicles.forEach(vehicle => {
 // Truyền danh sách từ filteredVehicles (đầu ra thuật toán)
 // vào suggestedList (trên màn hình)
 
-
+// =====================================================================================
+// Phần User_window
 function toggleChatWindow() {
     var chatWindow = document.getElementById("chatWindow");
     // Toggle the visibility of the chat window
@@ -79,3 +117,4 @@ const totalDivs = divElements.length;
 
 // Hiển thị tổng số lượng thẻ div có class "my-class"
 document.getElementById("section-title").innerText = "Mua bán ô tô. Tổng: " + totalDivs + " tin.";
+// =====================================================================================

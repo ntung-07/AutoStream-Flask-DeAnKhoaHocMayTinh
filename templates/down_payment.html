@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="../static/down_payment.css">
 </head>
 <body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <img src="../static/images/autostream_logo.jpg" alt="Logo" class="logo2">
+        <div class="navbar-links">
+            <a href="{{ url_for('index') }}" class="nav-button">Trang chủ</a>
+            <a href="{{ url_for('all_vehicles') }}" class="nav-button">Tìm kiếm xe</a>
+            <a href="{{ url_for('login') }}" class="nav-button">Đăng nhập</a>
+            <a href="{{ url_for('register') }}" class="nav-button">Đăng ký</a>
+        </div>
+    </div>
+
     <div class="page-wrapper">
         <div class="content-wrapper">
             <div class="info-section">
@@ -17,6 +28,8 @@
                     <div class="short-description">
                         <p>2022 Porsche GT3 RS NEW</p>
                         <p>Jet Black</p>
+                        <p id="fee" style="display: none;">Phí dịch vụ: VND139.500.000</p>
+                        <p id="service" style="display: none;"> đặt cọc</p>
                     </div>
                 </div>
             </div>
@@ -31,15 +44,52 @@
                 </div>
                 <div class="form-group">
                     <label for="deposit-amount" class="form-label">Số tiền đặt cọc</label>
-                    <input type="text" id="deposit-amount" class="form-input" name="deposit_amount" value="30.000.000 VND" readonly>
+                    <input type="text" id="deposit-amount" class="form-input" name="deposit_amount" value="VND139.500.000" readonly>
                 </div>
                 <div class="form-group">
                     <label for="contact" class="form-label">Thông tin liên hệ</label>
                     <input type="text" id="contact" class="form-input" name="contact" required>
                 </div>
-                <button type="submit" class="submit-btn">Xác nhận đặt cọc</button>
+                <button type="submit" class="submit-btn" id="submit-btn">Xác nhận đặt cọc</button>
             </form>
         </div>
     </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>AutoStream</h2>
+                <p>Chuyên cung cấp các dòng xe cao cấp.</p>
+            </div>
+            <div class="footer-section contact">
+                <h2>Liên hệ</h2>
+                <p>Địa chỉ: 12 Nguyễn Sơn, Long Biên, TP. Hà Nội</p>
+                <p>Email: contact@autostream.com</p>
+                <p>Điện thoại: +84 959 558 885</p>
+            </div>
+            <div class="footer-section social">
+                <h2>Kết nối với chúng tôi</h2>
+                <a href="#"><img src="../static/images/facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="../static/images/instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="../static/images/twitter-icon.png" alt="Twitter"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 AutoStream | Tất cả quyền được bảo lưu.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('submit-btn').onclick = function() {
+            event.preventDefault();
+            // Get the vehicle ID and listing ID from the page
+            const fee = document.getElementById('fee').innerText.split(':')[1].trim();
+            const service = document.getElementById('service').innerText.trim();
+            
+            const url = `{{ url_for('confirmation_3') }}?fee=${encodeURIComponent(fee)}&service=${encodeURIComponent(service)}`;
+
+            window.location.href = url;
+        };
+    </script>
 </body>
 </html>

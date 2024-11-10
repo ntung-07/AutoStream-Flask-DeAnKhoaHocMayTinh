@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      A Simple Invoice Template Responsive and clean with HTML CSS SCSS
+      Invoice
     </title>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -54,8 +54,8 @@
             </thead>
             <tbody>
               <tr>
-                <td>Dat coc giu xe</td>
-                <td>30.000.000</td>
+                <td>{{ service }}</td>
+                <td>{{ fee }}</td>
               </tr>
               <tr>
                 <td>tax</td>
@@ -70,7 +70,7 @@
                 <tbody>
                   <tr>
                     <td>Subtotal</td>
-                    <td>VND.30.000.000</td>
+                    <td>{{ fee }}</td>
                   </tr>
                   <tr>
                     <td>‎</td>
@@ -86,7 +86,7 @@
           </div>
           <!-- invoice total  -->
           <div class="invoice-total-amount">
-            <p>Total : VND.30.000.000</p>
+            <p>Total : {{ fee }}</p>
           </div>
         </div>
         <!-- invoice footer -->

@@ -7,17 +7,31 @@
     <link rel="stylesheet" href="../static/car_inspection_form.css">
 </head>
 <body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <img src="../static/images/inspection-logo.jpg" alt="Logo" class="logo">
+        <div class="navbar-links">
+            <a href="{{ url_for('index') }}" class="nav-button">Trang chủ</a>
+            <a href="{{ url_for('all_vehicles') }}" class="nav-button">Tìm kiếm xe</a>
+            <a href="{{ url_for('login') }}" class="nav-button">Đăng nhập</a>
+            <a href="{{ url_for('register') }}" class="nav-button">Đăng ký</a>
+        </div>
+    </div>
+
     <div class="page-wrapper">
         <div class="content-wrapper">
             <div class="info-section">
                 <h1 class="form-title">Đăng ký kiểm định xe</h1>
                 <p class="form-subtitle">Hoàn tất thông tin sau đây để yêu cầu kiểm định</p>
-                <div class="logo-container">
-                  <img src="../static/images/inspection-logo.jpg" alt="Logo" class="logo">
-                  <p>Dịch vụ kiểm định xe Autostream giúp bạn an tâm trên mọi hành trình. 
-                    Chúng tôi cam kết mang lại sự an toàn và chất lượng cao nhất cho phương 
-                    tiện của bạn, đảm bảo rằng mọi chi tiết kỹ thuật đều được kiểm tra tỉ mỉ. 
-                  </p>
+                <div class="service-info">
+                    <p class="service-description">
+                        <strong>Dịch vụ kiểm định xe Autostream</strong> giúp bạn an tâm trên mọi hành trình. 
+                        Chúng tôi cam kết mang lại sự an toàn và chất lượng cao nhất cho phương tiện của bạn, 
+                        đảm bảo rằng mọi chi tiết kỹ thuật đều được kiểm tra tỉ mỉ.
+                    </p>
+                    <p id="service" style="display: none;"> kiểm định</p>
+                    <p class="fee" id="fee">Phí dịch vụ: <span>VND750.000</span></p>
                 </div>
             </div>
             
@@ -47,9 +61,52 @@
                     <input type="email" id="email" class="form-input" placeholder="Nhập email">
                 </div>
 
-                <button type="submit" class="submit-btn">Gửi yêu cầu</button>
+                <button type="submit" class="submit-btn" id="submit-btn">Gửi yêu cầu</button>
             </form>
         </div>
     </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>AutoStream</h2>
+                <p>Chuyên cung cấp các dòng xe cao cấp.</p>
+            </div>
+            <div class="footer-section contact">
+                <h2>Liên hệ</h2>
+                <p>Địa chỉ: 12 Nguyễn Sơn, Long Biên, TP. Hà Nội</p>
+                <p>Email: contact@autostream.com</p>
+                <p>Điện thoại: +84 959 558 885</p>
+            </div>
+            <div class="footer-section social">
+                <h2>Kết nối với chúng tôi</h2>
+                <a href="#"><img src="../static/images/facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="../static/images/instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="../static/images/twitter-icon.png" alt="Twitter"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 AutoStream | Tất cả quyền được bảo lưu.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('submit-btn').onclick = function() {
+            event.preventDefault();
+            // Get the vehicle ID and listing ID from the page
+            const fee = document.getElementById('fee').innerText.split(':')[1].trim();
+            const service = document.getElementById('service').innerText.trim();
+
+            sessionStorage.setItem('fee', fee)
+            sessionStorage.setItem('service', service)
+
+            // Construct the URL for the inspection form
+            // const url = `{{ url_for('checkout') }}?fee=${encodeURIComponent(fee)}&service=${encodeURIComponent(service)}`;
+
+            // Redirect to the inspection form
+            window.location.href = '/confirmation';
+        };
+    </script>
+
 </body>
 </html>

@@ -31,9 +31,12 @@
                                     <button onclick="toggleChatWindow()">X</button>
                                 </div>
                                 <div class="chat-content">
-                                    {% if fengshui and occupation %}
+                                    {% if fengshui and occupation and gender and family_size and budget%}
                                     <p><strong>Mệnh:</strong> {{ fengshui }}</p>
                                     <p><strong>Nghề nghiệp:</strong> {{ occupation }}</p>
+                                    <p><strong>Giới:</strong> {{ gender }}</p>
+                                    <p><strong>Quy mô gia đình:</strong> {{ family_size }}</p>
+                                    <p><strong>Ngân sách:</strong> {{ budget }}</p>
                                     {% else %}
                                     <p>Vui lòng đăng nhập để được gợi ý!</p>
                                     {% endif %}
@@ -190,9 +193,35 @@
         </section>
     </div>
 
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>AutoStream</h2>
+                <p>Chuyên cung cấp các dòng xe cao cấp.</p>
+            </div>
+            <div class="footer-section contact">
+                <h2>Liên hệ</h2>
+                <p>Địa chỉ: 12 Nguyễn Sơn, Long Biên, TP. Hà Nội</p>
+                <p>Email: contact@autostream.com</p>
+                <p>Điện thoại: +84 959 558 885</p>
+            </div>
+            <div class="footer-section social">
+                <h2>Kết nối với chúng tôi</h2>
+                <a href="#"><img src="../static/images/facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="../static/images/instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="../static/images/twitter-icon.png" alt="Twitter"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 AutoStream | Tất cả quyền được bảo lưu.
+        </div>
+    </footer>
+
     <script type="text/javascript">
         const userFengshui = "{{ fengshui | safe }}";
         const userOccupation = "{{ occupation | safe }}";
+        const userGender = "{{ gender | safe }}";
+        const userFamilySize = "{{ family_size | safe }}";
     </script>
     <script src="../static/js/all_vehicles.js"></script>
 </body>

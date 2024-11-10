@@ -6,11 +6,23 @@
   <link rel="stylesheet" href="../static/checkout.css">
 </head>
 <body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <img src="../static/images/autostream_logo.jpg" alt="Logo" class="logo2">
+    <div class="navbar-links">
+        <a href="{{ url_for('index') }}" class="nav-button">Trang chủ</a>
+        <a href="{{ url_for('all_vehicles') }}" class="nav-button">Tìm kiếm xe</a>
+        <a href="{{ url_for('login') }}" class="nav-button">Đăng nhập</a>
+        <a href="{{ url_for('register') }}" class="nav-button">Đăng ký</a>
+    </div>
+</div>
+
   <div class="page-wrapper">
     <div class="content-wrapper">
       <div class="info-section">
         <h1 class="form-title">Cổng thanh toán dịch vụ</h1>
-        <p class="form-subtitle">Thanh toán và hoàn tất lập hồ sơ kiểm định.</p>
+        <p class="form-subtitle">Thanh toán và hoàn tất lập hồ sơ <span id="service-display" style="font-weight: bold;">{{ service }}</span></p>
         <div class="logo-container">
           <img src="/static/images/gate-84.png" alt="Product Logo" class="logo">
         </div>
@@ -40,16 +52,54 @@
           </div>
           <div class="amount-display">
             <label for="amount" class="form-label">Số tiền thanh toán</label>
-            <input type="text" class="form-input" name="amount" id="amount" value="1.080.000 VND" readonly />
+            <input type="text" class="form-input" name="amount" id="amount" value="{{ fee }}" readonly />
           </div>
         </div>
         <div>
           <label for="cvv" class="form-label">CVV</label>
           <input type="password" id="cvv" class="form-input" name="cvv" >
         </div>
-        <button type="submit" class="submit-btn">Thanh toán</button>
+        <button type="submit" class="submit-btn" id="submit-btn">Thanh toán</button>
       </form>
     </div>
   </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h2>AutoStream</h2>
+            <p>Chuyên cung cấp các dòng xe cao cấp.</p>
+        </div>
+        <div class="footer-section contact">
+            <h2>Liên hệ</h2>
+            <p>Địa chỉ: 12 Nguyễn Sơn, Long Biên, TP. Hà Nội</p>
+            <p>Email: contact@autostream.com</p>
+            <p>Điện thoại: +84 959 558 885</p>
+        </div>
+        <div class="footer-section social">
+            <h2>Kết nối với chúng tôi</h2>
+            <a href="#"><img src="../static/images/facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="../static/images/instagram-icon.png" alt="Instagram"></a>
+            <a href="#"><img src="../static/images/twitter-icon.png" alt="Twitter"></a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2024 AutoStream | Tất cả quyền được bảo lưu.
+    </div>
+</footer>
+
+  <script>
+    document.getElementById('submit-btn').onclick = function() {
+      event.preventDefault();
+      // Get the vehicle ID and listing ID from the page
+      const fee = document.getElementById('amount').value;
+      const service = document.getElementById('service-display').innerText;
+      
+      const url = `{{ url_for('confirmation_2') }}?fee=${encodeURIComponent(fee)}&service=${encodeURIComponent(service)}`;
+
+      window.location.href = url;
+    };
+  </script>
+
 </body>
 </html>
