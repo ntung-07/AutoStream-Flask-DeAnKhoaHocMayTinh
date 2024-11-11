@@ -29,33 +29,23 @@
                     <tr>
                         <th>Số Hóa Đơn</th>
                         <th>Ngày Tạo</th>
-                        <th>Trạng Thái</th>
+                        <th>Nội dung</th>
                         <th>Tổng Tiền</th>
                         <th>Chi Tiết</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>#123456</td>
-                        <td>01/11/2024</td>
-                        <td class="status paid">Đã Thanh Toán</td>
-                        <td>500,000 VNĐ</td>
-                        <td><button class="btn-view">Xem</button></td>
-                    </tr>
-                    <tr>
-                        <td>#123457</td>
-                        <td>02/11/2024</td>
-                        <td class="status unpaid">Chưa Thanh Toán</td>
-                        <td>750,000 VNĐ</td>
-                        <td><button class="btn-view">Xem</button></td>
-                    </tr>
-                    <tr>
-                        <td>#123458</td>
-                        <td>03/11/2024</td>
-                        <td class="status pending">Đang Chờ</td>
-                        <td>320,000 VNĐ</td>
-                        <td><button class="btn-view">Xem</button></td>
-                    </tr>
+                    {% if invoices %}
+                        {% for index, invoice in enumerate(invoices) %}
+                            <tr>
+                                <td>#{{ index + 1 }}</td>
+                                <td>{{ invoice.created_date }}</td>
+                                <td>{{ invoice.service }}</td>
+                                <td>{{ invoice.fee }}</td>
+                                <td><a href="{{ url_for('invoice_detail', invoice_index=index) }}"><button class="btn-view">Xem</button></a></td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>
@@ -87,3 +77,5 @@
 
 </body>
 </html>
+
+

@@ -123,9 +123,8 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
-#-------------------------------------------------------------
-# Vehicle searching site acts as vehicle_suggestion_algorithm.
-#-------------------------------------------------------------
+# ===========================================================================================================================================================================================================================
+
 @app.route('/all_vehicles')
 def all_vehicles():
     username = session.get("username")
@@ -237,13 +236,8 @@ def get_user_budget():
     else:
         return None
 
-#-------------------------------------------------------------
-# Vehicle searching site acts as vehicle_suggestion_algorithm.
-#-------------------------------------------------------------
+# ===========================================================================================================================================================================================================================
 
-#-------------------------------------------------------------------------------------
-# Listing details site then proceeds to Car_inpection_service and Down_payment_service.
-#-------------------------------------------------------------------------------------
 @app.route('/detail_of_listing')
 def detail_of_listing():
     return render_template('detail-of-listing.html')
@@ -271,11 +265,37 @@ def down_payment():
 
 @app.route('/checkout', methods = ['GET', 'POST'])
 def checkout():
-    
     fee = request.args.get('fee')
     service = request.args.get('service')
 
+    if "invoices" not in session:
+        session["invoices"] = []
+
+    invoice = {
+        "fee": fee,
+        "service": service,
+        'created_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    }
+    session["invoices"].append(invoice)
+    session.modified = True
+
     return render_template('checkout.html', fee = fee, service = service)
+
+@app.route('/invoices')
+def invoices():
+    invoices = session.get("invoices", [])
+    return render_template("invoices.html", invoices = invoices, enumerate = enumerate)
+
+@app.route('/invoice/<int:invoice_index>')
+def invoice_detail(invoice_index):
+    invoices = session.get('invoices', [])
+    if 0 <= invoice_index < len(invoices):
+        invoice = invoices[invoice_index]
+        return render_template('detailed_invoice.html', fee=invoice['fee'], service=invoice['service'], 
+                               created_date=invoice['created_date'], invoice_index = invoice_index)
+    else:
+        flash("Hóa đơn không tồn tại!", "error")
+        return redirect(url_for('invoices'))
 
 @app.route('/invoice')
 def invoice():

@@ -41,7 +41,7 @@
 											<h3>Welcome, {{ session['name'] }}!</h3>
 										{% endif %}
 										<a href="#">Xem thông tin</a>
-										<a href="#">Hóa đơn</a>
+										<a href="{{ url_for('invoices') }}">Hóa đơn</a>
 										<a href="{{ url_for('logout') }}">Đăng xuất</a>
 									</div>
 								</div>
