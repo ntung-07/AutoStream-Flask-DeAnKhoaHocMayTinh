@@ -32,6 +32,17 @@
         <div class="right">
             <div class="form-container">
                 <header>Đăng ký tài khoản</header>
+                <!-- Vùng hiển thị các thông báo flash -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages" style="font-size: 13px; color: red; padding-top: 25px;">
+                        {% set category, message = messages[0] %}  <!-- Chỉ lấy thông báo đầu tiên -->
+                        <div class="flash-message {{ category }}">
+                            {{ message }}
+                        </div>
+                    </div>
+                {% endif %}
+                {% endwith %}
                 <form action="{{ url_for('register') }}" method="POST">
                     <div class="form first">
                         <div class="details personal">
@@ -39,49 +50,49 @@
                             <div class="fields">
                                 <div class="input-field">
                                     <label>Tên đăng nhập</label>
-                                    <input name="username" type="text" placeholder="Nhập tên tài khoản" required>
+                                    <input name="username" type="text" placeholder="Nhập tên tài khoản" required value="{{ username }}">
                                 </div>
                                 <div class="input-field">
                                     <label>Họ và tên</label>
-                                    <input name="name" type="text" placeholder="Nhập họ và tên" required>
+                                    <input name="name" type="text" placeholder="Nhập họ và tên" required value="{{ name }}">
                                 </div>
                                 <div class="input-field">
                                     <label>Ngày sinh</label>
-                                    <input name="dob" type="date" placeholder="Nhập ngày sinh" required>
+                                    <input name="dob" type="date" placeholder="Nhập ngày sinh" required value="{{ dob }}">
                                 </div>
                                 <div class="input-field">
                                     <label>Email</label>
-                                    <input name="email" type="email" placeholder="Nhập địa chỉ email" required>
+                                    <input name="email" type="email" placeholder="Nhập địa chỉ email" required value="{{ email }}">
                                 </div>
                                 <div class="input-field">
                                     <label>Số điện thoại</label>
-                                    <input name="phone" type="tel" placeholder="Nhập số điện thoại" required>
+                                    <input name="phone" type="tel" placeholder="Nhập số điện thoại" required value="{{ phone }}">
                                 </div>
                                 <div class="input-field">
                                     <label>Giới tính</label>
-                                    <select name="gender" required>
+                                    <select name="gender" required value="{{ gender }}">
                                         <option disabled selected>Chọn giới tính</option>
-                                        <option>Nam</option>
-                                        <option>Nữ</option>
-                                        <option>Khác</option>
+                                        <option {% if gender == "Nam" %}selected{% endif %}>Nam</option>
+                                        <option {% if gender == "Nữ" %}selected{% endif %}>Nữ</option>
+                                        <option {% if gender == "Khác" %}selected{% endif %}>Khác</option>
                                     </select>
                                 </div>
                                 <div class="input-field">
                                     <label>Nghề nghiệp</label>
-                                    <select name="occupation" required>
+                                    <select name="occupation" required value="{{ occupation }}">
                                         <option disabled selected>Chọn nghề nghiệp</option>
-                                        <option>Sinh viên</option>
-                                        <option>Kỹ sư xây dựng</option>
-                                        <option>Kế toán</option>
+                                        <option {% if occupation == "Sinh viên" %}selected{% endif %}>Sinh viên</option>
+                                        <option {% if occupation == "Kỹ sư xây dựng" %}selected{% endif %}>Kỹ sư xây dựng</option>
+                                        <option {% if occupation == "Kế toán" %}selected{% endif %}>Kế toán</option>
                                     </select>
                                 </div>
                                 <div class="input-field">
                                     <label>Quy mô gia đình</label>
-                                    <input name="family_size" type="number" placeholder="Nhập số người" required>
+                                    <input name="family_size" type="number" placeholder="Nhập số người" required value="{{ family_size }}">
                                 </div>
                                 <div class="input-field">
                                     <label>Ngân sách tối đa</label>
-                                    <input name="maximum_budget" type="number" placeholder="Nhập ngân sách" required>
+                                    <input name="maximum_budget" type="number" placeholder="Nhập ngân sách" required value="{{ maximum_budget }}">
                                 </div>
                             </div>
                         </div>
@@ -116,7 +127,7 @@
                                 </div>
                                 <div class="input-field">
                                     <label>Mật khẩu</label>
-                                    <input name="password" type="password" placeholder="Nhập mật khẩu" >
+                                    <input name="password" type="password" placeholder="Nhập mật khẩu" value="{{ password }}">
                                 </div>
                                 <button class="nextBtn">
                                     <span class="btnText">Đăng ký</span>

@@ -7,41 +7,46 @@
 		<link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
         <title>Home - AutoStream</title>
         <link rel="stylesheet" href="static/indexcss/bootstrap.min.css">
-		<link rel="stylesheet" href="static/indexcss/bootsnav.css" >
         <link rel="stylesheet" href="static/indexcss/style.css">
         <link rel="stylesheet" href="static/indexcss/responsive.css">
     </head>
 	<body>
+		<!-- Hiển thị thông báo flash -->
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				<div class="flash-message" id="flashMessage">
+					{% for message in messages %}
+						<p>{{ message }}</p>
+						<p>Vui lòng đăng xuất để thực hiện các thao tác đăng nhập, tạo tài khoản</p>
+					{% endfor %}
+				</div>
+			{% endif %}
+		{% endwith %}
+
 		<section id="home" class="welcome-hero">
 			<div class="top-area">
 				<div class="header-area">
-				    <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
-				        <div class="container">
-				            <div class="navbar-header">
-				                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-				                    <i class="fa fa-bars"></i>
-				                </button>
-				                <a class="navbar-logo" href="index.html">
-									<img src="static/images/autostream_logo.jpg" alt="AutoStream Logo"">
-								</a>
-				            </div>
-				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-				                    <li class=" scroll active"><a href="#home">Trang chủ</a></li>
-				                    <li class="scroll"><a href="{{ url_for('all_vehicles') }}">Tìm kiếm xe</a></li>
-				                    <li class="scroll"><a href="{{ url_for('login') }}">Đăng nhập</a></li>
-				                    <li class="scroll"><a href="{{ url_for('register') }}">Đăng ký</a></li>
-				                </ul>
-				            </div>
-				        </div>
-				    </nav>
-
-					{% if session['name'] %}
-						<div class="welcome-session">
-							<span>Welcome, {{ session['name'] }}!</span>
-							<a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+					<!-- Navbar -->
+						<div class="navbar">
+							<img src="../static/images/autostream_logo.jpg" alt="Logo" class="logo">
+							<div class="navbar-links">
+								<a href="{{ url_for('index') }}" class="nav-button">Trang chủ</a>
+								<a href="{{ url_for('all_vehicles') }}" class="nav-button">Tìm kiếm xe</a>
+								<a href="{{ url_for('login') }}" class="nav-button">Đăng nhập</a>
+								<a href="{{ url_for('register') }}" class="nav-button">Đăng ký</a>
+								<div class="user-icon-container">
+									<img src="../static/images/800px_COLOURBOX5559055.jpg" class="drop-down-icon" onclick="toggleUserMenu()">
+									<div id="userMenu" class="user-menu">
+										{% if session['name'] %}
+											<h3>Welcome, {{ session['name'] }}!</h3>
+										{% endif %}
+										<a href="#">Xem thông tin</a>
+										<a href="#">Hóa đơn</a>
+										<a href="{{ url_for('logout') }}">Đăng xuất</a>
+									</div>
+								</div>
+							</div>
 						</div>
-					{% endif %}
 
 				</div>
 			    <div class="clearfix"></div>
@@ -131,6 +136,38 @@
 				&copy; 2024 AutoStream | Tất cả quyền được bảo lưu.
 			</div>
 		</footer>
+
+		<script>
+			// Kiểm tra xem có thông báo flash hay không
+			const flashMessage = document.getElementById('flashMessage');
+			if (flashMessage) {
+				// Thêm class 'show' để hiển thị thông báo
+				flashMessage.classList.add('show');
+	
+				// Ẩn thông báo sau 3 giây
+				setTimeout(() => {
+					flashMessage.classList.remove('show');
+				}, 3000);  // Thời gian hiển thị là 3 giây
+			}
+
+			// Toggle the visibility of the user menu
+			function toggleUserMenu() {
+				const userMenu = document.getElementById('userMenu');
+				userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+			}
+
+			// Close the user menu if clicking outside of it
+			window.onclick = function(event) {
+				if (!event.target.matches('.drop-down-icon')) {
+					const userMenu = document.getElementById('userMenu');
+					if (userMenu && userMenu.style.display === 'block') {
+						userMenu.style.display = 'none';
+					}
+				}
+			}
+
+
+		</script>
 
 	</body>
 </html>

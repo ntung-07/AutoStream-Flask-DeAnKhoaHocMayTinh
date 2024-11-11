@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, session, url_for, flash
 from datetime import datetime
 from pymongo import MongoClient
 from werkzeug.utils import redirect
+import re
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -17,6 +18,10 @@ def index():
 
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
+    if "username" in session:
+        flash("Bạn chưa đăng xuất !")
+        return redirect(url_for("index"))
+
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
@@ -29,31 +34,74 @@ def register():
         family_size = request.form.get('family_size')
         maximum_budget = request.form.get('maximum_budget')
 
-        if username and password and email and dob and phone and gender and occupation and family_size and maximum_budget:
-            user_data = {
-                "username": username,
-                "password": password,
-                "name": name,
-                "email": email,
-                "dob": dob,
-                "phone": phone,
-                "gender": gender,
-                "occupation": occupation,
-                "family_size": family_size,
-                "maximum_budget": maximum_budget
-            }
+        # Bắt buộc điền đầy đủ các trường thông tin.
+        if not all([username, password, email, dob, phone, gender, occupation, 
+                    family_size, maximum_budget]):
+            flash("Vui lòng điền đầy đủ thông tin !", "error")
+            return render_template("register.html", username=username, name=name, email=email, dob=dob,
+                                   phone=phone, gender=gender, occupation=occupation, family_size=family_size,
+                                   maximum_budget=maximum_budget)
 
-            users_collection.insert_one(user_data)
+        # Kiểm tra định dạng email.
+        email_regex = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        if not re.match(email_regex, email):
+            flash("Email không đúng định dạng !", "error")
+            return render_template("register.html", username=username, name=name, email=email, dob=dob,
+                                   phone=phone, gender=gender, occupation=occupation, family_size=family_size,
+                                   maximum_budget=maximum_budget, password = password)
+        
+        # Kiểm tra trùng khớp email trong cơ sở dữ liệu.
+        if users_collection.find_one({"email": email}):
+            flash("Email đã được liên kết với tài khoản khác !", "error")
+            return render_template("register.html", username=username, name=name, email=email, dob=dob,
+                                   phone=phone, gender=gender, occupation=occupation, family_size=family_size,
+                                   maximum_budget=maximum_budget, password = password)
+        
+        # Tên đăng nhập trùng khớp với tên đã có.
+        if users_collection.find_one({"username": username}):
+            flash("Tên đăng nhập đã tồn tại !", "error")
+            return render_template("register.html", username=username, name=name, email=email, dob=dob,
+                                   phone=phone, gender=gender, occupation=occupation, family_size=family_size,
+                                   maximum_budget=maximum_budget, password = password)
 
-            return redirect(url_for('login'))
+        # Yêu cầu mật khẩu mạnh.
+        password_regex = r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
+        if not re.match(password_regex, password):
+            flash("Mật khẩu cần có độ dài ít nhất 8 ký tự, bao gồm chữ viết hoa, chữ viết thường" + 
+                  " chữ số, và ký tự đặc biệt.", "error")
+            return render_template("register.html", username=username, name=name, email=email, dob=dob,
+                                   phone=phone, gender=gender, occupation=occupation, family_size=family_size,
+                                   maximum_budget=maximum_budget, password = password)
 
-        else:
-            flash("Please fill in all fields!", "error")
-            return render_template("register.html")
+        user_data = {
+            "username": username,
+            "password": password,
+            "name": name,
+            "email": email,
+            "dob": dob,
+            "phone": phone,
+            "gender": gender,
+            "occupation": occupation,
+            "family_size": family_size,
+            "maximum_budget": maximum_budget
+        }
+
+        users_collection.insert_one(user_data)
+
+        return redirect(url_for('verify_user'))
+
     return render_template("register.html")
+
+@app.route('/verify_user')
+def verify_user():
+    return render_template("verify_user.html")
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
+    if "username" in session:
+        flash("Bạn chưa đăng xuất !")
+        return redirect(url_for("index"))
+    
     if request.method == 'POST':
         username = request.form["username"]
         password = request.form["password"]
@@ -66,7 +114,7 @@ def login():
             return redirect(url_for("index"))
         else:
             flash("Invalid username or password. Try again!")
-            return redirect(url_for("login"))
+            return render_template("login.html", username = username, password = password)
 
     return render_template("login.html")
 

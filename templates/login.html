@@ -19,13 +19,25 @@
             <div class="recaptcha-info">
                 <p>Trang web được bảo mật bởi Google reCAPTCHA.</p>
             </div>
+
+            <!-- Hiển thị thông báo flash -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-message" style="font-size: 12px; color: red; padding-top: 20px;">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
             <div class="login-form">
                 <form action="{{ url_for('login') }}" method="POST">
                     <label for="username">Tên đăng nhập</label>
-                    <input type="text" id="username" name="username" required placeholder="">
+                    <input type="text" id="username" name="username" required placeholder="" value="{{ username }}">
                     
                     <label for="password">Mật khẩu</label>
-                    <input type="password" id="password" name="password" required placeholder="">
+                    <input type="password" id="password" name="password" required placeholder="" value="{{ password }}">
                     
                     <button type="submit" class="login-btn">Đăng nhập</button>
 

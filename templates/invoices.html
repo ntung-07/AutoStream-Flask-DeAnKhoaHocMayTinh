@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Hóa Đơn</title>
+    <link rel="stylesheet" href="../static/invoices.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <img src="../static/images/autostream_logo.jpg" alt="Logo" class="logo">
+        <div class="navbar-links">
+            <a href="{{ url_for('index') }}" class="nav-button">Trang chủ</a>
+            <a href="{{ url_for('all_vehicles') }}" class="nav-button">Tìm kiếm xe</a>
+            <a href="{{ url_for('login') }}" class="nav-button">Đăng nhập</a>
+            <a href="{{ url_for('register') }}" class="nav-button">Đăng ký</a>
+        </div>
+    </div>
+
+    <div class="invoice-container">
+        <header>
+            <h1>Danh Sách Hóa Đơn</h1>
+        </header>
+        
+        <div class="invoice-table-container">
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th>Số Hóa Đơn</th>
+                        <th>Ngày Tạo</th>
+                        <th>Trạng Thái</th>
+                        <th>Tổng Tiền</th>
+                        <th>Chi Tiết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#123456</td>
+                        <td>01/11/2024</td>
+                        <td class="status paid">Đã Thanh Toán</td>
+                        <td>500,000 VNĐ</td>
+                        <td><button class="btn-view">Xem</button></td>
+                    </tr>
+                    <tr>
+                        <td>#123457</td>
+                        <td>02/11/2024</td>
+                        <td class="status unpaid">Chưa Thanh Toán</td>
+                        <td>750,000 VNĐ</td>
+                        <td><button class="btn-view">Xem</button></td>
+                    </tr>
+                    <tr>
+                        <td>#123458</td>
+                        <td>03/11/2024</td>
+                        <td class="status pending">Đang Chờ</td>
+                        <td>320,000 VNĐ</td>
+                        <td><button class="btn-view">Xem</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>AutoStream</h2>
+                <p>Chuyên cung cấp các dòng xe cao cấp.</p>
+            </div>
+            <div class="footer-section contact">
+                <h2>Liên hệ</h2>
+                <p>Địa chỉ: 12 Nguyễn Sơn, Long Biên, TP. Hà Nội</p>
+                <p>Email: contact@autostream.com</p>
+                <p>Điện thoại: +84 959 558 885</p>
+            </div>
+            <div class="footer-section social">
+                <h2>Kết nối với chúng tôi</h2>
+                <a href="#"><img src="../static/images/facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="../static/images/instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="../static/images/twitter-icon.png" alt="Twitter"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 AutoStream | Tất cả quyền được bảo lưu.
+        </div>
+    </footer>
+
+</body>
+</html>
