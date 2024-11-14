@@ -39,6 +39,8 @@
 									<div id="userMenu" class="user-menu">
 										{% if session['name'] %}
 											<h3>Welcome, {{ session['name'] }}!</h3>
+										{% else %}
+											<h3>Tài khoản: Chưa đăng nhập.</h3>
 										{% endif %}
 										<a href="#">Xem thông tin</a>
 										<a href="{{ url_for('invoices') }}">Hóa đơn</a>

@@ -15,6 +15,14 @@
     <link rel="stylesheet" href="../static/invoice.css" />
   </head>
   <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <img src="../static/images/autostream_logo.jpg" alt="Logo" class="logo">
+      <div class="navbar-links">
+          <a href="{{ url_for('invoices') }}" class="nav-button">Quay lại</a>
+      </div>
+    </div>
+
     <section class="wrapper-invoice">
       <!-- switch mode rtl by adding class rtl on invoice class -->
       <div class="invoice">

@@ -45,6 +45,10 @@
                                 <td><a href="{{ url_for('invoice_detail', invoice_index=index) }}"><button class="btn-view">Xem</button></a></td>
                             </tr>
                         {% endfor %}
+                    {% else %}
+                        <tr>
+                            <h3>Bạn chưa thực hiện giao dịch nào.</h3>
+                        </tr>
                     {% endif %}
                 </tbody>
             </table>
